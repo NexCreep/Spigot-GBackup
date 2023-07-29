@@ -1,17 +1,20 @@
 package net.silvaniax.plugin.spigotgbackup;
 
+import net.silvaniax.plugin.spigotgbackup.abstracts.GBackupLogger;
+import net.silvaniax.plugin.spigotgbackup.tasks.BackupTask;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class GBackup extends JavaPlugin {
+public final class GBackup extends JavaPlugin implements GBackupLogger {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-
+        LOGGER.info("GBackup enabled and operative");
+        BackupTask.registerTask(this,10, 2);
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        BackupTask.unregisterTask();
+        LOGGER.info("GBackup disabled");
     }
 }
