@@ -1,0 +1,7 @@
+name: GBackup
+version: '${version}'
+main: net.silvaniax.plugin.spigotgbackup.GBackup
+api-version: '1.20'
+prefix: gbackup
+authors: [NexCreep]
+description: Backup manager connected to Google Drive
