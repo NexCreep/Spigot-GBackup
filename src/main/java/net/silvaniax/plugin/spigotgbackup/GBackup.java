@@ -10,11 +10,17 @@ import java.io.IOException;
 
 public final class GBackup extends JavaPlugin implements GBackupLogger {
 
+    private final static String START_UP = "startup";
+    private final static String INTERVAL = "timer";
+
     @Override
     public void onEnable() {
         LOGGER.info("GBackup enabled and operative");
         createConfig();
-        BackupTask.registerTask(this,10, 2);
+
+        FileConfiguration config = this.getConfig();
+
+        BackupTask.registerTask(this, config.getInt(START_UP), config.getInt(INTERVAL));
     }
 
     @Override

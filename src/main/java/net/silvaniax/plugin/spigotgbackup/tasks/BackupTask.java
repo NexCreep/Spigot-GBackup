@@ -58,19 +58,14 @@ public class BackupTask extends BukkitRunnable implements GBackupLogger {
         return task;
     }
 
-    @SuppressWarnings("unchecked")
-    public static BackupTask registerTask(Plugin plugin, Integer delay, Integer interval) {
+    public static void registerTask(Plugin plugin, Integer delay, Integer interval) {
         if (task == null) {
             task = new BackupTask();
-            Object possibleList = plugin.getConfig().get("backup_worlds");
-            if (possibleList instanceof List<?>) {
-                task.backupWorlds = (List<String>) possibleList;
-            }
-            task.runTaskTimer(plugin, 20L * delay, (20 * 3600) * interval);
+            task.backupWorlds = plugin.getConfig().getStringList("backup_worlds");
+            task.runTaskTimerAsynchronously(plugin, 20L * delay, (20 * 3600) * interval);
         } else {
             GBackupLogger.LOGGER.info("There is already a operative task with ID \"" + task.getTaskId() + "\"");
         }
-        return task;
     }
 
     public static void unregisterTask() {
