@@ -1,4 +1,4 @@
-package net.silvaniax.plugin.spigotgbackup.services;
+package net.silvaniax.plugin.spigotgbackup.utils;
 
 import net.silvaniax.plugin.spigotgbackup.abstracts.GBackupLogger;
 

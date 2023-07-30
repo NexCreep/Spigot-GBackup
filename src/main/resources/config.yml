@@ -7,3 +7,6 @@ backup_worlds:
   - "world"
   - "world_nether"
   - "world_the_end"
+# Backups Web Log
+port: 777
+secret_phrase: "mondongo"

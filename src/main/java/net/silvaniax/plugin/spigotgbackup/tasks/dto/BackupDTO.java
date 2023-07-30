@@ -7,7 +7,6 @@ import java.util.Date;
 public class BackupDTO {
 
     private String name;
-    private String world;
     private Date executionTime;
     private String backupFile;
 

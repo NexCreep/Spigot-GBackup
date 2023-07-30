@@ -1,12 +1,12 @@
 package net.silvaniax.plugin.spigotgbackup;
 
 import net.silvaniax.plugin.spigotgbackup.abstracts.GBackupLogger;
+import net.silvaniax.plugin.spigotgbackup.services.AuditLog;
 import net.silvaniax.plugin.spigotgbackup.tasks.BackupTask;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
 
 public final class GBackup extends JavaPlugin implements GBackupLogger {
 
@@ -21,6 +21,7 @@ public final class GBackup extends JavaPlugin implements GBackupLogger {
         FileConfiguration config = this.getConfig();
 
         BackupTask.registerTask(this, config.getInt(START_UP), config.getInt(INTERVAL));
+        AuditLog.start(BackupTask.getTask(), config.getInt("port"), config.getString("secret_phrase"));
     }
 
     @Override
