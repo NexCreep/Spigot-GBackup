@@ -1,12 +1,14 @@
 package net.silvaniax.plugin.spigotgbackup.tasks;
 
 import net.silvaniax.plugin.spigotgbackup.abstracts.GBackupLogger;
+import net.silvaniax.plugin.spigotgbackup.services.DriveManager;
 import net.silvaniax.plugin.spigotgbackup.services.WorldCompression;
 import net.silvaniax.plugin.spigotgbackup.tasks.dto.BackupDTO;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Logger;
@@ -38,7 +40,8 @@ public class BackupTask extends BukkitRunnable implements GBackupLogger {
 
         LOGGER.info("Started new backup execution with ID \"" + execution.getName() + "\"");
 
-        WorldCompression.compress(this.backupWorlds, execution.getBackupFile());
+        File backupFile = WorldCompression.compress(this.backupWorlds, execution.getBackupFile());
+        //DriveManager.uploadBackup(backupFile);
 
         backupRegistry.add(execution);
 

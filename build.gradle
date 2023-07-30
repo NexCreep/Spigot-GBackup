@@ -1,4 +1,5 @@
 plugins {
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
     id 'java'
 }
 
@@ -48,4 +49,11 @@ processResources {
     filesMatching('plugin.yml') {
         expand props
     }
+}
+
+jar { enabled = false }
+
+artifacts.archives(tasks.shadowJar)
+tasks.shadowJar {
+    archiveFileName.set(rootProject.name + "-v" + version + ".jar")
 }
