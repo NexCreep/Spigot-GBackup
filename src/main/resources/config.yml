@@ -1,0 +1,9 @@
+# Delay of the first backup when server just start up. (Expressed in seconds)
+startup: 10
+# Interval between backup execution. (Expressed in hours)
+timer: 2
+# List of worlds to be backed.
+backup_worlds:
+  - "world"
+  - "world_nether"
+  - "world_the_end"
