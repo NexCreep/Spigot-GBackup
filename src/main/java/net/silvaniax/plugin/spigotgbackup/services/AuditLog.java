@@ -48,7 +48,7 @@ public class AuditLog implements GBackupLogger {
         ctx.result(result.toString());
     }
 
-    private void stop(){
+    public void stop(){
         this.app.stop();
         LOGGER.info("Web log was stopped");
     };

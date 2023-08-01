@@ -27,6 +27,7 @@ public final class GBackup extends JavaPlugin implements GBackupLogger {
     @Override
     public void onDisable() {
         BackupTask.unregisterTask();
+        AuditLog.getAuditLogServer().stop();
         LOGGER.info("GBackup disabled");
     }
 
