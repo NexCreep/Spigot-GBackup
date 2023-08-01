@@ -16,14 +16,17 @@ public class AuditLog implements GBackupLogger {
 
     private static String secretPhrase = null;
 
+    private final Javalin app;
+
     private AuditLog(BackupTask task, Integer port, String secretPhrase) {
 
         AuditLog.secretPhrase = secretPhrase;
 
         AuditLog.task = task;
         JavalinLogger.enabled = false;
-        Javalin app = Javalin.create().start(port);
-        app.get("/backups/log/{secret}", AuditLog::renderLog);
+        this.app = Javalin.create().start(port);
+        this.app.get("/backups/log/{secret}", AuditLog::renderLog);
+        LOGGER.info(String.format("Web log listening on *:%s", port));
     }
 
     private static void renderLog(Context ctx) {
@@ -43,6 +46,15 @@ public class AuditLog implements GBackupLogger {
         result.append("------------------------------------------\n");
 
         ctx.result(result.toString());
+    }
+
+    private void stop(){
+        this.app.stop();
+        LOGGER.info("Web log was stopped");
+    };
+
+    public static AuditLog getAuditLogServer() {
+        return auditLogServer;
     }
 
     public static void start(BackupTask task, Integer port, String secretPhrase) {
